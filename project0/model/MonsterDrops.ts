@@ -1,6 +1,6 @@
 export interface IMonsterDrops{
     name: string,
-    type: string,
+    generalName: string,
     monsters: string[],
     dropRate:number,
     minWorldRank:number,
@@ -9,15 +9,15 @@ export interface IMonsterDrops{
 
 class MonsterDrops implements IMonsterDrops {
     public name: string;
-    public type: string;
+    public generalName: string;
     public monsters:string[];
     public dropRate:number;
     public minWorldRank: number;
     public rarity:string;
 
-    constructor(name:string, type:string, monsters:string[], dropRate:number, minWorldRank:number, rarity:string) {
+    constructor(name:string, generalName:string, monsters:string[], dropRate:number, minWorldRank:number, rarity:string) {
         this.name = name; 
-        this.type = type;
+        this.generalName = generalName;
         this.monsters = monsters;
         this.dropRate = dropRate;
         this.minWorldRank = minWorldRank; 

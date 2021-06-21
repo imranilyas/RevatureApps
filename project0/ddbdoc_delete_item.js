@@ -1,12 +1,12 @@
-import { GetCommand } from "@aws-sdk/lib-dynamodb";
+import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "./libs/ddbDocClient.js";
-const TABLE_NAME = "genshin-drops";
+const TABLE_NAME = "genshin-drops"
 
-// Set the parameters.
+// Set the parameters
 const params = {
   TableName: TABLE_NAME,
   /*
-  Convert the key JavaScript object you are retrieving to the
+  Convert the key JavaScript object you are deleting to the
   required Amazon DynamoDB record. The format of values specifies
   the datatype. The following list demonstrates different
   datatype formatting requirements:
@@ -18,20 +18,18 @@ const params = {
   NullAttribute: null
    */
   Key: {
-    'name': "ominous mask", // For example, 'Season': 2.
-    //sortKey: "VALUE", // For example,  'Episode': 1; (only required if table has sort key).
+    name: "Damaged Mask", // For example, 'Season': 2.
+    //sortKey: "VALUE_2", // For example,  'Episode': 1; (only required if table has sort key).
   },
 };
 
-const getItem = async () => {
+const run = async () => {
   try {
-    const data = await ddbDocClient.send(new GetCommand(params));
-    console.log("Success :", data.Item);
+    const data = await ddbDocClient.send(new DeleteCommand(params));
+    console.log("Success - item deleted");
     return data;
   } catch (err) {
     console.log("Error", err);
   }
 };
-getItem();
-
-//export function getItem()
+run();
