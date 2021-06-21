@@ -17,24 +17,25 @@ const params = {
   NullAttribute: null
    */
   Key: {
-    Name: "Damaged Mask", // For example, 'Season': 2.
+    "name": "Damaged Mask", // For example, 'Season': 2.
     //sortKey: "VALUE_2", // For example,  'Episode': 1; (only required if table has sort key).
   },
   // Define expressions for the new or updated attributes
   UpdateExpression: "set monster = :t, rarity = :s", // For example, "'set Title = :t, Subtitle = :s'"
   ExpressionAttributeValues: {
     ":t": "Hilichurls", // For example ':t' : 'NEW_TITLE'
-    ":s": "green", // For example ':s' : 'NEW_SUBTITLE'
+    ":s": "grey", // For example ':s' : 'NEW_SUBTITLE'
   },
 };
 
-const run = async () => {
+const UpdateDrop = async () => {
   try {
     const data = await ddbDocClient.send(new UpdateCommand(params));
     console.log("Success - item added or updated", data);
+    console.log(params);
     return data;
   } catch (err) {
     console.log("Error", err);
   }
 };
-run();
+UpdateDrop();

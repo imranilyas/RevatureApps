@@ -18,15 +18,15 @@ const params = {
     NullAttribute: null
      */
   Item: {
-    name: "Damaged Mask", // For example, 'Season': 2
+    name: "Nectar", // For example, 'Season': 2
     //sortKey: "VALUE_2", // For example,  'Episode': 2 (only required if table has sort key)
-    monster: "hilichurls",
-    rarity: "white", //For example 'Title': 'The Beginning'
+    monster: "Whooping Flowers",
+    rarity: "grey", //For example 'Title': 'The Beginning'
 
   },
 };
 
-const run = async () => {
+const addDrop = async () => {
   try {
     const data = await ddbDocClient.send(new PutCommand(params));
     console.log("Success - item added or updated", data);
@@ -36,4 +36,4 @@ const run = async () => {
     console.log("Error", err);
   }
 };
-run();
+addDrop();

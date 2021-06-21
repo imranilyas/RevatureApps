@@ -23,7 +23,7 @@ const params = {
   },
 };
 
-const run = async () => {
+const deleteDrop = async () => {
   try {
     const data = await ddbDocClient.send(new DeleteCommand(params));
     console.log("Success - item deleted");
@@ -32,4 +32,4 @@ const run = async () => {
     console.log("Error", err);
   }
 };
-run();
+deleteDrop();
