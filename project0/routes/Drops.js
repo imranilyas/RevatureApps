@@ -1,5 +1,6 @@
 import { GetCommand, PutCommand, ScanCommand, UpdateCommand, DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { ddbDocClient } from "../libs/ddbDocClient.js";
+import MonsterDrops from "../model/MonsterDrops.js";
 const TABLE_NAME = "genshin-drops";
 
 //retrieve 1 item by name

@@ -18,7 +18,7 @@ const params = {
   NullAttribute: null
    */
   Key: {
-    'name': "ominous mask", // For example, 'Season': 2.
+    'name': "Damaged Mask", // For example, 'Season': 2.
     //sortKey: "VALUE", // For example,  'Episode': 1; (only required if table has sort key).
   },
 };
@@ -27,6 +27,7 @@ const getItem = async () => {
   try {
     const data = await ddbDocClient.send(new GetCommand(params));
     console.log("Success :", data.Item);
+    console.log(data.Item.rarity);
     return data;
   } catch (err) {
     console.log("Error", err);
