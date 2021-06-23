@@ -12,7 +12,6 @@ export const getItem = async (monDrop) => {
     };
     try {
         const data = await ddbDocClient.send(new GetCommand(params));
-        console.log("Success :", data.Item);
         let mons = [];
         let count = 0;
         for(const i of data.Item.monster){

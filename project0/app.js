@@ -3,6 +3,8 @@ import MonsterDrops from './model/MonsterDrops.js';
 import { getItem } from './routes/getItem.js';
 import { addItem } from './routes/addItem.js';
 const app = express();
+app.set('query parser', 'simple');
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/drops/:name', async (req, res) => {
@@ -16,12 +18,13 @@ app.get('/drops/:name', async (req, res) => {
     }
 });
 
-app.post('/drops', async (req, res) => {
+app.post('/add', async (req, res, next) => {
     try {
-        const {b} = req.body;
-        console.log(req.body.b);
-        await addItem(b);
-        //res.send(newDrop);
+        let b = req.body;
+        let d = new MonsterDrops(b.name, b.generalName, b.monster, b.dropRate, b.minWorldRank, b.rarity);
+        //console.log(req.body.b);
+        const newDrop = await addItem(d);
+        res.send(newDrop);
     } catch (error) {
         console.error(error);
         res.status(500).json({error: "bad stuff"});

@@ -4,30 +4,13 @@ import MonsterDrops from "../model/MonsterDrops.js";
 const TABLE_NAME = "genshin-drops";
 //add 1 item to the table
 export const addItem = async (monDrop) => {
+    let objectDrop = monDrop.objectDrop();
     const params = {
         TableName: TABLE_NAME,
-        Item: {
-            name: monDrop.name,
-            generalName: monDrop.generalName,
-            monster: monDrop.monster,
-            dropRate: monDrop.dropRate,
-            minWorldRank: monDrop.minWorldRank,
-            rarity: monDrop.rarity
-        },
+        Item: objectDrop,
     };
     try {
-        const data = await ddbDocClient.put(new PutCommand(params));
-        console.log(data);
-        /*console.log("Success - item added or updated", data);
-        let mons = [];
-        let count = 0;
-        for (const i of data.Item.monster) {
-            mons[count] = i;
-            count++;
-        }
-        let MD = new MonsterDrops(data.Item.name, data.Item.generalName, mons, data.Item.dropRate, data.Item.minWorldRank, data.Item.rarity);
-        return MD;
-        */
+        return await ddbDocClient.send(new PutCommand(params));
     }
     catch (err) {
         console.log("Error", err);
