@@ -1,6 +1,6 @@
 import  MonsterDrops, { IMonsterDrops } from "../../entities/Drops";
 import { ddb, ddbDoc } from "../DB/dynamo";
-import { DeleteCommand, PutCommand, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { DeleteCommand, GetCommand, PutCommand, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 
 const TABLE = "genshin";
 
@@ -9,6 +9,7 @@ export interface Dao{
     add: (IDrop: IMonsterDrops) => Promise<void>;
     getAll: () => Promise<any>;
     deleteDrop: (name: string) => Promise<void>; 
+    getDrop: (name: string) => Promise<any>;
 }
 
 class DropsDao implements Dao{
@@ -47,6 +48,21 @@ class DropsDao implements Dao{
         //Send null otherwise
         console.log(`${name} does not exist inside the database.`)
         return Promise.resolve(null);
+    }
+
+    public async getDrop(dropName: string) {
+        const params = {
+            TableName: this.table,
+            Key: {
+                "dropName": dropName,
+            },
+        };
+        try {
+            const data = await ddbDoc.send(new GetCommand(params));
+            return data.Item;
+        } catch (err) {
+            console.log("Error: " + err);
+        }
     }
 
     public async getAll() {

@@ -20,6 +20,13 @@ export async function getItem(req: Request, res: Response) {
     return res.status(OK).json(drop).end();
 }
 
+// uses path params
+export async function getDrop(req: Request, res: Response) {
+    const {dropName} = req.params;
+    let drop = await dao.getDrop(dropName);
+    return res.status(OK).json(drop).end();
+}
+
 export async function getAll(req: Request, res: Response) {    //Check if that specific dropName is in DB
     //Returns Item information to server
     let drop = await dao.getAll();
