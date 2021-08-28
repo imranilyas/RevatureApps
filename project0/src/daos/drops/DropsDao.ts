@@ -40,7 +40,7 @@ class DropsDao implements Dao{
                     count++;
                 }
                 //parse data templated object i.e. MonsterDrops
-                monDrop = new MonsterDrops(i.dropName ,i.generalName, mons, i.dropRate, i.minWorldRank, i.rarity);
+                monDrop = new MonsterDrops(i.dropName, i.photo, i.generalName, mons, i.dropRate, i.minWorldRank, i.rarity);
                 console.log("Success: ", monDrop);
                 return Promise.resolve(monDrop);
             }
