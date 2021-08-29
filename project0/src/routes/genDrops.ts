@@ -40,12 +40,12 @@ export async function deleteDrop(req: Request, res: Response){
 }
 
 export async function addOrUpdate(req: Request, res: Response){
-    let {IDrop} = req.body;
-    if(!IDrop){
+    let {item} = req.body;
+    if(!item){
         return res.status(BAD_REQUEST).json({
             error: "Missing 1 or more parameters"
         });
     }
-    await dao.add(IDrop);
-    res.status(200).json(`${IDrop.dropName} was added or updated`).end();
+    await dao.add(item);
+    res.status(200).json(`${item.dropName} was added or updated`).end();
 }
